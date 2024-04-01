@@ -13,7 +13,8 @@ public class TestRunnerService {
     public static void runTests(Class<?> c) {
         try {
             Object testInstance = c.getDeclaredConstructor().newInstance();
-            Method beforeSuite = null, afterSuite = null;
+            Method beforeSuite = null;
+            Method afterSuite = null;
             List<Method> testMethods = new ArrayList<>();
             List<Method> beforeTestMethods = new ArrayList<>();
             List<Method> afterTestMethods = new ArrayList<>();
@@ -38,13 +39,13 @@ public class TestRunnerService {
 
             testMethods.sort(Comparator.comparingInt(m -> m.getAnnotation(Test.class).priority()));
 
-            invokeMethod(beforeSuite, null); // BeforeSuite должен быть статическим
+            invokeMethod(beforeSuite, c);
             for (Method testMethod : testMethods) {
                 beforeTestMethods.forEach(m -> invokeMethod(m, testInstance));
                 invokeTestMethod(testMethod, testInstance);
                 afterTestMethods.forEach(m -> invokeMethod(m, testInstance));
             }
-            invokeMethod(afterSuite, null); // AfterSuite должен быть статическим
+            invokeMethod(afterSuite, c);
         } catch (Exception e) {
             e.printStackTrace();
         }
