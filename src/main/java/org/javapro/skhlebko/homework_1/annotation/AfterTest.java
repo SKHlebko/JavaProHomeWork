@@ -1,4 +1,4 @@
-package org.javapro.skhlebko.annotation;
+package org.javapro.skhlebko.homework_1.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface BeforeTest {
+public @interface AfterTest {
 }

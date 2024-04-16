@@ -1,7 +1,7 @@
-package org.javapro.skhlebko.service;
+package org.javapro.skhlebko.homework_1.service;
 
 
-import org.javapro.skhlebko.annotation.*;
+import org.javapro.skhlebko.homework_1.annotation.*;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

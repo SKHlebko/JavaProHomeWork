@@ -1,6 +1,6 @@
-package org.javapro.skhlebko.test;
+package org.javapro.skhlebko.homework_1.test;
 
-import org.javapro.skhlebko.annotation.*;
+import org.javapro.skhlebko.homework_1.annotation.*;
 
 public class ExampleTests {
 
