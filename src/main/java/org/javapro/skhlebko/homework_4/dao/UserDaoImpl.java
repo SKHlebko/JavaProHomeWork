@@ -39,8 +39,7 @@ public class UserDaoImpl implements UserDao {
     public Optional<User> findById(Long id) {
         try {
             log.info("Finding user by ID: {}", id);
-            User user = jdbcTemplate.queryForObject(FIND_BY_ID_SQL, rowMapper, id);
-            return Optional.ofNullable(user);
+            return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_ID_SQL, rowMapper, id));
         } catch (EmptyResultDataAccessException e) {
             log.error("User not found for ID: {}", id, e);
             return Optional.empty();
