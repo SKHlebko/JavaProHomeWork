@@ -1,6 +1,7 @@
 package org.javapro.skhlebko.homework_4.dao;
 
 import lombok.extern.slf4j.Slf4j;
+import org.javapro.skhlebko.homework_4.exception.UserNotFoundException;
 import org.javapro.skhlebko.homework_4.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -42,7 +43,7 @@ public class UserDaoImpl implements UserDao {
             return Optional.ofNullable(jdbcTemplate.queryForObject(FIND_BY_ID_SQL, rowMapper, id));
         } catch (EmptyResultDataAccessException e) {
             log.error("User not found for ID: {}", id, e);
-            return Optional.empty();
+            throw new UserNotFoundException("User not found for ID: " + id);
         }
     }
 
@@ -68,8 +69,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void delete(Long id) {
+    public Long delete(Long id) {
+        findById(id);
         log.info("Deleting user by ID: {}", id);
         jdbcTemplate.update(DELETE_SQL, id);
+        return id;
     }
 }

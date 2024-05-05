@@ -2,17 +2,16 @@ package org.javapro.skhlebko.homework_4.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-//import org.javapro.skhlebko.homework_4.dao.UserDao;
-//import org.javapro.skhlebko.homework_4.dao.UserDaoImpl;
-//import org.javapro.skhlebko.homework_4.service.UserService;
-//import org.javapro.skhlebko.homework_4.service.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.sql.DataSource;
 
 @Configuration
+@ComponentScan(basePackages = "org.javapro.skhlebko.homework_4")
 public class AppConfig {
 
     @Bean
@@ -31,13 +30,8 @@ public class AppConfig {
         return new JdbcTemplate(dataSource);
     }
 
-//    @Bean
-//    public UserDao userDao(JdbcTemplate jdbcTemplate) {
-//        return new UserDaoImpl(jdbcTemplate);
-//    }
-//
-//    @Bean
-//    public UserService userService(UserDao userDao) {
-//        return new UserServiceImpl(userDao);
-//    }
+    @Bean
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
+        return new NamedParameterJdbcTemplate(dataSource);
+    }
 }
